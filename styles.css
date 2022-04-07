@@ -1,0 +1,694 @@
+/********************
+*      GENERALES    *
+*********************/
+:root {
+    --main-bg-color: rgb(204, 194, 163);
+    --main-border-color: rgb(70, 68, 62);
+    --main-active-color: royalblue;
+    --b-size: 0.4vw;
+}
+body {
+    overflow:hidden; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background:rgb(179, 205, 250);
+}
+.skin {
+    background: var(--main-bg-color);
+    border: var(--b-size) solid var(--main-border-color);
+    border-radius: var(--b-size);
+    box-sizing: border-box;
+}
+
+main {
+    position: relative;
+}
+/********************
+* ESTATUS DEL JUEGO *
+*********************/
+#game_status{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20vh;
+    width: 20vw;
+}
+/* TURNOS */
+#game_status>.turn{
+    float:left;
+    margin: 1%;
+    width: 65%;
+    height: calc(100% - var(--b-size));
+
+}
+#game_status>.turn>.name-player {
+    text-align: center;
+    color:  var(--main-active-color);
+    font-weight: bolder;
+    
+    font-size: 1vw;
+
+    display: block;
+    width: 100%;
+    height: 30%;
+}
+#game_status>.turn>.action-status{
+    font-size: 1vw;
+    text-align: center;
+    display: block;
+    width: 100%;
+    height: 30%;
+}
+
+#game_status>.turn>#turn_status{
+    font-size: 1vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 40%;
+
+    margin: 0 auto;
+}
+#game_status>.turn>#turn_status>.player{
+    width: 0.8vw;
+    text-align:center;
+    padding:0.1vw+0.7vh;
+    margin: 0.1vw;
+    border: 2px solid var(--main-active-color);
+    border-radius: var(--b-size);
+}
+#game_status>.turn>#turn_status>.player-turn{
+    background-color: var(--main-active-color);
+    color: white;
+    font-weight: bolder;
+
+}
+/* TIRADA */
+#game_status>.dice{
+    width: 30%;
+    height: calc(100% - var(--b-size));
+    margin: 1.5%;
+    float: right;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+#game_status>.dice>strong {
+    color: white;
+    background-color: var(--main-border-color);
+    text-align: center;
+    font-size: 6vh;
+    padding: 3.5vh+1.5vw;
+    border-radius: var(--b-size);
+}
+/*********
+* TITULO *
+**********/
+#game_title {
+    position: absolute;
+    top: 0;
+    left: 20vw;
+    height: 9.5vh;
+    width: 48vw;
+    margin:0 var(--b-size);
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2vw;
+}
+#game_title>.game-name,#game_title>#logo-game,#game_title>.game-id {
+   padding: 0 0.5vw;
+
+}
+#game_title>.game-name {
+    color: var(--main-active-color);
+}
+#game_title>.logo-game>#title{
+    padding:0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.4vw;
+}
+#game_title>.game-id {
+    text-align: right;
+    color: var(--main-active-color);
+}
+
+/*****************
+* ESTADO JUGADOR *
+******************/
+#player_status{
+    position: absolute;
+    top: 0;
+    left: 69vw;
+
+    height: 40vh;
+    width: 30vw;
+}
+/* NOMBRE */
+#player_status>.player-status {
+    font-size: 2.5vh;
+    margin: 1% auto;
+    width: 26vw;
+    height: 2vh;
+}
+#player_status>.player-status .id-player {
+    color: var(--main-active-color);
+    margin-left: 2%;
+}
+#player_status>.player-status>#name-player {
+    color: var(--main-active-color);
+    float: right;
+    margin-right: 8%;
+    font-weight: bold;
+
+}
+#player_status>.player-hp-bar{
+    margin: 2vh 0.5vw;
+    border: 0.3vw solid white;
+    height: 4.2vh;
+    color: white;
+    background-color: #999;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2.6vh;
+    position:relative;
+    width: 27.5vw;
+    border-radius: var(--b-size);
+}
+#player_status>.player-hp-bar>span{
+    position: absolute;
+}
+#player_status>.player-hp-bar>span:nth-child(1){
+    left: 1vw;
+}
+#player_status>.player-hp-bar>span:nth-child(2){
+    right: 3.6vw;
+}
+#player_status>.player-hp-bar>span:nth-child(3){
+    right: 2.8vw;
+}
+#player_status>.player-hp-bar>span:nth-child(4){
+    right: 1vw;
+}
+#player_status>.player-hp-bar>.current-hp{
+    border-radius: calc(var(--b-size) - 0.3vw);
+    display:block;
+    background-color: limegreen;
+    height: 100%;
+    width: 100%;
+    transition: 2s;
+    color: white;
+}
+/*
+#player_status>.player-hp-bar>.current-hp:hover{
+    width: 60%;
+    background-color: orange;
+}*/
+
+/* DATOS DE JUGADOR */
+#player_status>.player-data{
+    font-size: 1vw;
+    margin: 0.4vh 0.2vw;
+    height: 26vh;
+}
+#player_status>.player-data>.player-profile{
+    font-size: 2vh;
+    margin: 0.4vh 0.2vw;
+    height: 26vh;
+    width: 15vw;
+    float: left;
+    padding: 0.2vh 0.2vw;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#player_status>.player-data>.player-profile>.player-level,
+#player_status>.player-data>.player-profile>.player-clan,
+#player_status>.player-data>.player-profile>.player-motto{
+    background: var(--main-border-color);
+    color: white;
+    width: 100%;
+    border-radius: var(--b-size);
+    border: 2px solid var(--main-border-color);
+    
+}
+#player_status>.player-data>.player-profile>.player-level,
+#player_status>.player-data>.player-profile>.player-clan{
+    height: 22%;
+    margin-bottom:1.55vh;
+    overflow:hidden;
+}
+#player_status>.player-data>.player-profile>.player-motto{
+    height: 30%;
+    overflow:hidden;
+}
+#player_status>.player-data>.player-profile>.player-level>strong,
+#player_status>.player-data>.player-profile>.player-clan>strong,
+#player_status>.player-data>.player-profile>.player-motto>strong{
+    padding-left: 0.2vw;
+}
+#player_status>.player-data>.player-profile>.player-level>#player-level-value,
+#player_status>.player-data>.player-profile>.player-clan>#player-clan-value,
+#player_status>.player-data>.player-profile>.player-motto>#player-motto-value{
+    display: block;
+    background-color: white;
+    color: black;
+    height: 100%;
+}
+#player_status>.player-data>.player-profile .player-motto-value{
+    font-style: italic;
+}
+/* IMAGEN PERFIL*/
+#player_status>.player-data>.player-image{
+    background-color: white;
+    margin: 0.5vh 0.5vw;
+    height: 23vh;
+    width: 11.7vw;
+    /* ---LA MEDIDA EN PX ----*/
+    border: 0.3vw solid var(--main-border-color); 
+    float: left;
+}
+#player_status>.player-data>.player-image>img{
+    width: 100%;
+    height: 100%;
+
+}
+
+/*****************
+* MAPA DEL JUEGO *
+******************/
+#game_map{
+    position: absolute;
+    top:  10.5vh;
+    left: 20.5vw;
+
+    height: 80vh;
+    width: 48vw;
+
+
+    text-align: center;
+
+    display: grid;
+
+    grid-template-rows: 11.34vh 11.34vh 11.34vh 11.34vh 11.34vh 11.34vh 11.34vh;
+    grid-template-columns: 6.76vw 6.76vw 6.76vw 6.76vw 6.76vw 6.76vw 6.76vw;
+   
+    justify-content: center;
+    align-content: center;
+
+    background-color: #888;
+
+}
+#game_map>.tile{
+    border: 0.2vw solid var(--main-border-color);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    color: transparent;
+    background-color: rgba(211, 241, 170, 0.8);
+}
+#game_map>.tile:hover{
+    background-color: rgb(211, 241, 170);
+}
+#game_map>.jungle {
+    background-color: rgb(3, 100, 40);
+}
+#game_map>.jungle:hover {
+    background-color: rgba(3, 100, 40, 0.6);
+}
+#game_map>.object {
+    background-color: rgba(79, 187, 178, 0.6);
+}
+#game_map>.object:hover {
+    background-color: rgb(79, 187, 178);
+}
+
+#game_map>.teamOne {
+    background-color: rgb(72, 61, 139);
+    font-weight: bolder;
+    color: white;
+}
+#game_map>.teamOne:hover {
+    background-color: rgb(72, 61, 139);
+    border: 0.2vw dashed white;
+}
+
+#game_map>.teamTwo {
+    background-color: rgba(112, 134, 73, 0.8);
+    color: white;
+    font-weight: bolder;
+}
+#game_map>.teamTwo:hover {
+    background-color: rgb(112, 134, 73);
+    border: 0.2vw dashed white;
+}
+#game_map>.current_turn {
+    border: 0.2vw solid var(--main-active-color);
+}
+
+#game_map>.movAvailable {
+    background-color: rgb(59, 153, 197);
+}
+#game_map>.movAvailable:hover {
+    background-color: rgba(59, 153, 197, 0.6);
+    border: 0.2vw dashed goldenrod;
+}
+#game_map>.attackAvailable {
+    background-color:  rgba(255, 100,100, 0.8);
+}
+#game_map>.attackAvailable:hover {
+    background-color:  rgb(255, 60, 60);
+    border: 0.2vw dashed goldenrod;
+}
+#game_map>.current-player {
+    border: 0.25vw solid var(--main-active-color);
+}
+/*****************
+*  MENU JUGADOR  *
+******************/
+#player_menu{
+    position: absolute;
+    top:  21vh;
+    left: 0;
+
+    height: 40vh;
+    width: 20vw;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-template-rows: auto auto auto auto auto;
+
+}
+#player_menu>.command{
+    background: var(--main-bg-color);
+    color: var(--main-active-color);
+    border: calc(var(--b-size)/1.5) solid var(--main-border-color);
+    border-radius: var(--b-size);
+    box-sizing: border-box;
+    margin: 0.1vw;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 19vw;
+    height: 6vh;
+    font-size: .9vw;
+    position: relative;
+}
+#player_menu>.command:hover{
+    background-color: var(--main-border-color);
+    color: white;
+}
+#player_menu>.command>img{
+    position: absolute;
+    right: 3vw;
+    height: 90%;
+    top: 0.3vh;
+
+}
+#player_menu>.command>strong{
+    position: absolute;
+    left: 2vw;
+    top: 1vh;
+
+}
+/*****************
+*       CHAT     *
+******************/
+#player_chat{
+    
+    position: absolute;
+    top:  62vh;
+    left: 0;
+
+    height: 36vh;
+    width: 20vw;
+
+    z-index: 3;
+
+}
+#player_chat>.chat-content{
+    margin: 0.5vh 0.3vw 0 0.28vw;
+    /*padding: 0.5vh 1vw;*/
+    height: 27vh;
+    width: 18.25vw;
+    background: #ddd; /*rgba(204, 194, 163, 0.979);*/
+    border: calc(var(--b-size)/1.5) solid var(--main-border-color);
+    border-top-left-radius: var(--b-size);
+    border-top-right-radius: var(--b-size);
+    font-size: 0.9vw;
+}
+#player_chat>.chat-content>p{
+    margin: 0.5vw;
+}
+#player_chat>.chat-content>.system{
+    color: orange;
+    font-weight: bolder;
+    text-shadow:
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+      1px 1px 0 #000;
+      letter-spacing: 1px;
+}
+#player_chat>.chat-bar {
+    margin: 0 0vw 0 0.25vw;
+    height: 4.5vh;
+    width: 18.8vw;
+    border: calc(var(--b-size)/1.5) solid var(--main-border-color);
+    border-top: 0px solid black;
+    font-size: 2.2vh;
+    border-bottom-left-radius: var(--b-size);
+    border-bottom-right-radius: var(--b-size);
+    padding-left: 1vh;
+}
+/*****************
+*    RENDIRSE    *
+******************/
+#game_surrender{
+    position: absolute;
+
+    top: 52vh;
+    left: 69vw;
+
+    height: 10vh;
+    width: 12vw;
+
+    color:  var(--main-active-color);
+    cursor: pointer;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+#game_surrender>.rendir {
+    color: red !important;
+}
+/*****************
+*     PAUSA      *
+******************/
+#game_pause{
+    position: absolute;
+
+    top: 41vh;
+    left: 69vw;
+
+
+    height: 10vh;
+    width: 12vw;
+
+    color:  var(--main-active-color);
+    cursor: pointer;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+/*****************
+*     TIEMPO     *
+******************/
+#game_time{
+    position: absolute;
+    top: 63vh;
+    left: 69vw;
+
+    height: 18vh;
+    width: 12vw;
+
+    
+}
+#game_time>.time-value{
+    font-weight: bolder;
+    font-size: 7vh;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+#game_time>.time-bar{
+    margin: 1vh 0.25vw;
+    border: 0.3vw solid var(--main-border-color);
+    height: 4vh;
+    color: white;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2.6vh;
+    position:relative;
+    width: 10vw;
+    border-radius: var(--b-size);
+}
+#game_time>.time-bar>#current-time{
+    border-radius: var(--b-size/2);
+    display:block;
+    background-color:var(--main-active-color);
+    height: 100%;
+    width: 100%;
+    transition: 0.5s;
+    color: transparent;
+
+}
+.animation-time-bar {
+    animation: time-bar 20s linear 1s infinite normal backwards running;
+}
+@keyframes time-bar {
+    40%  {background-color: var(--main-active-color);}
+    70%  {background-color: purple}
+    80%  {background-color:darkred;}
+    100% {background-color:red;}
+}
+
+
+/*****************
+*  ESPECTADORES  *
+******************/
+#game_spectators{
+    position: absolute;
+    top: 41vh;
+    left: 82vw;
+
+    height: 57vh;
+    width: 17vw;
+}
+
+#game_spectators>.user-list{
+    margin: 0.5vh 0.5vw 0 0.35vw;
+    padding: 0.5vh 1vw;
+    height: 27vh;
+    width: 13vw;
+    background: #ddd; /*rgba(204, 194, 163, 0.979);*/
+    border: calc(var(--b-size)/1.5) solid var(--main-border-color);
+    border-top-left-radius: var(--b-size);
+    border-top-right-radius: var(--b-size);
+    font-size: 0.9vw;
+}
+#game_spectators>.user-list>li{
+    list-style-type: none;
+    font-weight: bolder;
+    color: grey;
+}
+#game_spectators>.user-list>li:hover{
+    color: var(--main-border-color);
+    text-shadow:
+    -1px -1px 0 grey,  
+     1px -1px 0 grey,
+     -1px 1px 0 grey,
+      1px 1px 0 grey;
+}
+#game_spectators>img{
+    width: 12vw;
+    height: 22vh;
+    margin: 1vh 2vw;
+}
+/*****************
+*  CONFIGURACION *
+******************/
+#game_options{
+    position: absolute;
+    top: 82vh;
+    left: 69vw;
+
+    height: 16vh;
+    width: 12vw;
+
+    color:  var(--main-active-color);
+    cursor: pointer;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+/*****************
+*     FOOTER     *
+******************/
+footer {
+    position: absolute;
+    top:  91.5vh;
+    left: 20.5vw;
+
+    height: 6.4vh;
+    width: 48vw;
+
+    font-size: 2vh;
+    text-align: center;
+    display: grid;
+
+}
+footer>p {
+    margin: 0;
+    padding: 1vh;
+}
+footer>p>a {
+    color: var(--main-border-color);
+    font-weight: bolder;
+    text-decoration: none;
+}
+footer>p>a:hover {
+    color: var(--main-active-color);
+}
+/*****************
+*     OTROS     *
+******************/
+#game_paused {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+}
+#game_paused>div {
+    position: absolute;
+    z-index: 3;
+    left: 34.5vw;
+    top: 40vh;
+    
+    width: 20vw;
+    height: 20vh;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+#game_paused>div>h2 {
+    margin: 0;
+    color: var(--main-active-color);
+}
+
+#game_paused>div>#no_pause{
+    background-color:var(--main-border-color);
+    color: white;
+    font-weight: bolder;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: none;
+    padding: 2vh;
+    z-index: 4;
+    cursor: pointer;
+}
