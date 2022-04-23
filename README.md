@@ -1,2 +1,2 @@
 # BattleJS
-A simple board game for navigator
+A simple board game for browser
